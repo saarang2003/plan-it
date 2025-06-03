@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/nextjs';
@@ -18,24 +19,25 @@ function DashboardLayout({
     const convex = useConvex();
     const router = useRouter();
 
-     useEffect(() => {
-    if (user) {
+      useEffect(() => {
+    if (user.isLoaded && user.user) {
       checkTeam();
     }
-  }, [user]);
+  }, [user.isLoaded, user.user]);
+
 
    const checkTeam = async () => {
-    const result = await convex.query(api.teams.getTeams, {
+      const result = await convex.query(api.teams.getTeams, {
       email: user?.user?.primaryEmailAddress?.emailAddress || "",
     });
     if (!result.length) {
-      router.push("/team/create");
+      router.push("/teams/create");
     }
   };
 
 
   return (
-    <div>DashboardLayout
+    <div className="h-screen overscroll-x-none" suppressHydrationWarning>
         <div className="grid sm:grid-cols-5 ">
           <div className="sm:col-span-1">
             <SideNav />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { api } from '@/convex/_generated/api';
@@ -18,10 +19,9 @@ export interface Team {
 }
 
 
-function SideNavTopSection() {
+function SideNavTopSection({ user, setActiveTeamInfo }: any) {
 
     const router = useRouter();
-    const user = useUser();
   const convex = useConvex();
   const menu = [
     {
@@ -56,7 +56,9 @@ function SideNavTopSection() {
   }, [user]);
 
 
-  // Removed useEffect with setActiveTeamInfo as it does not exist and is unnecessary
+   useEffect(() => {
+    activeTeam ? setActiveTeamInfo(activeTeam) : null;
+  }, [activeTeam]);
   
 
   const  [isOpen, setIsOpen] = useState(false);
