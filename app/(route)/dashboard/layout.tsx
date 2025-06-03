@@ -5,6 +5,7 @@ import { useConvex } from 'convex/react';
 import { useRouter } from 'next/navigation';
 
 import React, { useEffect } from 'react'
+import SideNav from './_components/SideNav';
 
 function DashboardLayout({
   children,
@@ -35,7 +36,14 @@ function DashboardLayout({
 
   return (
     <div>DashboardLayout
-        {children}
+        <div className="grid sm:grid-cols-5 ">
+          <div className="sm:col-span-1">
+            <SideNav />
+          </div>
+          <div className="sm:col-span-4 h-screen overscroll-x-none overflow-y-auto w-full">
+            {children}
+          </div>
+        </div>
     </div>
   )
 }
