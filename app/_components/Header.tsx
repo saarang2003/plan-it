@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
 import React from "react";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton} from "@clerk/nextjs"
 
 function Header() {
   return (
@@ -76,21 +78,19 @@ function Header() {
             </nav>
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
+              <SignedIn>
+                <UserButton/>
+              </SignedIn>
+              <SignedOut>
+              <div className="sm:flex cursor-pointer  sm:gap-4">
                 <a
-                  className="block rounded-md px-5 py-2.5 text-sm font-medium text-white transition "
+                  className="hidden rounded-md bg-gray-100 px-5 py-2.5   text-sm font-medium text-black transition hover:text-black-600/75 sm:block"
                   href="#"
                 >
-                  Login
-                </a>
-
-                <a
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-black transition hover:text-black-600/75 sm:block"
-                  href="#"
-                >
-                  Register
+                <SignUpButton/>
                 </a>
               </div>
+              </SignedOut>
 
               <button className="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
                 <span className="sr-only">Toggle menu</span>
